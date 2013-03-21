@@ -1,18 +1,13 @@
-# README for a newly created project.
+# Data for Wraithdale
 
-There are a couple of things you should do first, before you can use all of Git's power:
+The data files should be in json format, matching the existing format
+I have added for the first few files.
 
-  * Add a remote to this project: in the Cloud9 IDE command line, you can execute the following commands
-    `git remote add [remote name] [remote url (eg. 'git@github.com:/ajaxorg/node_chat')]` [Enter]
-  * Create new files inside your project
-  * Add them to to Git by executing the following command
-    `git add [file1, file2, file3, ...]` [Enter]
-  * Create a commit which can be pushed to the remote you just added
-    `git commit -m 'added new files'` [Enter]
-  * Push the commit the remote
-    `git push [remote name] master` [Enter]
+Please check the format of the data using [jsonlint](http://jsonlint.com/) or [json visualization](http://chris.photobooks.com/json/default.htm).
 
-That's it! If this doesn't work for you, please visit the excellent resources from [Github.com](http://help.github.com) and the [Pro Git](http://http://progit.org/book/) book.
-If you can't find your answers there, feel free to ask us via Twitter (@cloud9ide), [mailing list](groups.google.com/group/cloud9-ide) or IRC (#cloud9ide on freenode).
+Once you complete your change "check that change in" using the following commands in the Terminal window at the bottom.
 
-Happy coding!
+    git add .
+    git commit -m 'I added something'
+
+Thanks for helping!
