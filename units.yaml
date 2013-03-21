@@ -58,7 +58,7 @@
             
 - # archers are either grouped rangers OR equiped militia (see the syntax in requires)
     name: archers    
-    requires: # if several build options then this has different syntax
+    requires: # if several build options then this has different syntax (extra level)
         - # build with militia
             - militia: 1
             - gold: 10

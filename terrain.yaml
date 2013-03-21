@@ -6,7 +6,7 @@
     from: # name of terrain(s) to upgrade from
         - plains
         - forest
-    gold: 1 # cost in gold (ommit if no cost)        
+    gold: 1 # cost in gold (ommit if no cost)            
     
 - # village can be created from farm for 10 gold if you have 3+ farms
     name: village # name of terrain to upgrade to
@@ -14,6 +14,8 @@
     gold: 10 # cost in gold (ommit if no cost)
     requires: 
         - village: 3 # required surrounding terrain (ommit if not required)
+    produces: 
+        - gold: 1 # production should be limited to gold from urban terrain types
 
 - # plains can be created from forest for 1 gold
     name: plains
