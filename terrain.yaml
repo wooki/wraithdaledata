@@ -1,0 +1,37 @@
+# Basic starting terrains are...
+# water, plains, forest, mountain, desert, village
+
+- # farm can be created from plains or forest for 1 gold
+    name: farm # name of terrain to upgrade to
+    from: # name of terrain(s) to upgrade from
+        - plains
+        - forest
+    gold: 1 # cost in gold (ommit if no cost)        
+    
+- # village can be created from farm for 10 gold if you have 3+ farms
+    name: village # name of terrain to upgrade to
+    from: farms # name of terrain to upgrade from
+    gold: 10 # cost in gold (ommit if no cost)
+    requires: 
+        - village: 3 # required surrounding terrain (ommit if not required)
+
+- # plains can be created from forest for 1 gold
+    name: plains
+    from: forest
+    gold: 1
+
+- # mountain can be created from mine for 5 gold
+    name: mine
+    from: mountain
+    gold: 5
+
+- # keep can be built for 10 gold if you have 2 villages
+    name: "keep"
+    from:
+        - plains
+        - forest
+        - farm
+        - village
+    gold: 10
+    requires: 
+        - village: 3

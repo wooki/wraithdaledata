@@ -1,0 +1,80 @@
+# Basic starting terrains are...
+# water, plains, forest, mountain, desert, village
+
+- # guard is basic fighter type unit
+    name: guard # name of unit to build    
+    requires: # for building requires lists terrain
+        - village: 1
+        - gold: 1 # cost in gold (ommit if no cost)        
+    stats: 
+        speed: 1 # no of squares movement
+        vision: 2 # no of squares can see the map
+        combat: 5 # skill in combat
+        ferocity: 2 # damage done in combat
+        morale: 5 # damage can sustain before disbanding
+        bonus: 
+            - village: 1.2 # combat skill multiplier in this terrain
+        
+
+- # ranger is a woodland unit
+    name: ranger     
+    requires: 
+        - forest: 3
+    stats: 
+        speed: 1 # no of squares movement
+        vision: 3 # no of squares can see the map
+        combat: 2 # skill in combat
+        ferocity: 1 # damage done in combat
+        morale: 5 # damage can sustain before disbanding
+        bonus: 
+            - forest: 3 # combat skill multiplier in this terrain
+            
+
+- # scout is basic mounted unit
+    name: scout     
+    requires: 
+        - plains: 3
+    stats: 
+        speed: 3 
+        vision: 5
+        combat: 2
+        ferocity: 0
+        morale: 2        
+
+- # militia is made up of guards and is the early combat unit of choice
+    name: militia    
+    requires: # for upgrading/combining requires lists other units
+        - guard: 3
+        - gold: 5
+    stats: 
+        speed: 1
+        vision: 2
+        combat: 25 # note: 3 guards + gold gives combat value equiv of 5 guards
+        ferocity: 10 
+        morale: 20
+        bonus: 
+            - village: 1.2
+            - farm: 1.2
+            
+- # archers are either grouped rangers OR equiped militia (see the syntax in requires)
+    name: archers    
+    requires: # if several build options then this has different syntax
+        - # build with militia
+            - militia: 1
+            - gold: 10
+        - # build with rangers
+            - ranger: 5            
+    stats: 
+        speed: 1
+        vision: 2
+        combat: 40 # higher combat value
+        ferocity: 6 # lower ferocity
+        morale: 20
+        bonus: 
+            - village: 1.3 # better bonus
+            - farm: 1.3            
+        
+        
+        
+        
+        
