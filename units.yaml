@@ -67,12 +67,9 @@
     stats: 
         speed: 1
         vision: 2
-        combat: 40 # higher combat value
+        combat: 40 # higher combat value (but no bonuses)
         ferocity: 6 # lower ferocity
-        morale: 20
-        bonus: 
-            - village: 1.3 # better bonus
-            - farm: 1.3            
+        morale: 20            
         
         
         
