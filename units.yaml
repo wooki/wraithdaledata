@@ -4,8 +4,8 @@
 - # guard is basic fighter type unit
     name: guard # name of unit to build    
     requires: # for building requires lists terrain
-        - village: 1
-        - gold: 1 # cost in gold (ommit if no cost)        
+        village: 1
+        gold: 1 # cost in gold (ommit if no cost)        
     stats: 
         speed: 1 # no of squares movement
         vision: 2 # no of squares can see the map
@@ -19,7 +19,7 @@
 - # ranger is a woodland unit
     name: ranger     
     requires: 
-        - forest: 3
+        forest: 3
     stats: 
         speed: 1 # no of squares movement
         vision: 3 # no of squares can see the map
@@ -30,12 +30,16 @@
             - forest: 3 # combat skill multiplier in this terrain
             
 
-- # scout is basic mounted unit
+- # scout is basic mounted unit from either plains/desert
     name: scout     
     requires: 
-        - plains: 3
+        -
+            plains: 3
+        -
+            desert: 3
+            water: 1
     stats: 
-        speed: 3 
+        speed: 4 
         vision: 5
         combat: 2
         ferocity: 0
@@ -44,8 +48,8 @@
 - # militia is made up of guards and is the early combat unit of choice
     name: militia    
     requires: # for upgrading/combining requires lists other units
-        - guard: 3
-        - gold: 5
+        guard: 3
+        gold: 5
     stats: 
         speed: 1
         vision: 2
@@ -53,25 +57,212 @@
         ferocity: 10 
         morale: 20
         bonus: 
-            - village: 1.2
-            - farm: 1.2
+            village: 1.2
+            farm: 1.2
             
 - # archers are either grouped rangers OR equiped militia (see the syntax in requires)
     name: archers    
     requires: # if several build options then this has different syntax (extra level)
         - # build with militia
-            - militia: 1
-            - gold: 10
+            militia: 1
+            gold: 10
         - # build with rangers
-            - ranger: 5            
+            ranger: 5
+        - # build with elves (cheap!)
+            elf: 3            
     stats: 
         speed: 1
         vision: 2
         combat: 40 # higher combat value (but no bonuses)
         ferocity: 6 # lower ferocity
         morale: 20            
-        
-        
-        
-        
-        
+
+- # sloop is smallest water unit
+    name: sloop
+    requires: 
+        water: 3
+        gold: 2
+    stats: 
+        speed: 3 # no of squares movement
+        vision: 5 # no of squares can see the map
+        combat: 2 # skill in combat
+        ferocity: 1 # damage done in combat
+        morale: 5 # damage can sustain before disbanding
+        water: true # can move on water only
+
+- # messenger is fast mounted unit
+    name: messenger     
+    requires: 
+        - # build
+            plains: 3
+            gold: 5
+        - # upgrade
+            scout: 1
+            gold: 2
+    stats: 
+        speed: 4 # faster at expense of vision and combat
+        vision: 4
+        combat: 1
+        ferocity: 0
+        morale: 1 
+
+- # riders are small group of cavalry
+    name: riders    
+    requires: 
+        scout: 3
+        gold: 10
+    stats: 
+        speed: 3 # slower than scout
+        vision: 3 # lower than scout
+        combat: 15 # much better combat
+        ferocity: 5
+        morale: 20 # v hard to kill           
+        bonus: 
+            plains: 1.5   
+            forest: 0.8
+
+- # cavalry
+    name: cavalry    
+    requires: 
+        riders: 3
+        gold: 10
+    stats: 
+        speed: 2 # slower than riders
+        vision: 2
+        combat: 60 # very good in combat
+        ferocity: 20
+        morale: 80 # v hard to kill
+        bonus: 
+            plains: 1.5  
+            forest: 0.6
+            mountains: 0.6
+            
+- # infantry are trained soldiers and building block of army
+    name: infantry    
+    requires:
+        militia: 3
+        gold: 10
+    stats: 
+        speed: 1
+        vision: 1
+        combat: 100
+        ferocity: 40 
+        morale: 60
+        bonus: 
+            village: 1.2
+            farm: 1.2
+
+- # army is the biggest general combat unit
+    name: army    
+    requires: # several upgrade options
+        - # basic mix
+            infantry: 3
+            cavalry: 1
+            archers: 2
+            gold: 30
+        - # cavalry heavy
+            infantry: 3
+            cavalry: 3
+            gold: 20
+        - # archers heavy
+            infantry: 3
+            archers: 4
+            gold: 40
+        - # from heavy cavalry
+            infantry: 3
+            heavy_cavalry: 1
+            gold: 20
+    stats: 
+        speed: 1
+        vision: 1
+        combat: 600
+        ferocity: 200 
+        morale: 300
+        bonus: 
+            plains: 1.2
+            forest: 0.6
+            mountain: 0.6
+
+- # knight, heavy cavalry
+    name: knight   
+    requires: 
+        - 
+            plains: 3
+            foundry: 1
+            line: 1
+            gold: 2
+    stats: 
+        speed: 2
+        vision: 2
+        combat: 25 # better than riders
+        ferocity: 10
+        morale: 40 # very hard to kill                   
+        bonus: 
+            plains: 1.5   
+            forest: 0.8
+
+- # heavy cavalry, cavalry made up of knights
+    name: heavy cavalry   
+    requires: 
+        - 
+            knights: 3
+            gold: 20
+    stats: 
+        speed: 2 
+        vision: 2
+        combat: 80 # very good in combat
+        ferocity: 30
+        morale: 160 # v hard to kill
+        bonus: 
+            plains: 1.5  
+            forest: 0.6
+            mountains: 0.6
+
+- # elf can only be recruited at glade
+    name: elf     
+    requires: 
+        glade: 1
+        forest: 4 # prevents glade from being developed too much
+    stats: 
+        speed: 2
+        vision: 4
+        combat: 4
+        ferocity: 2
+        morale: 8
+        bonus: 
+            - forest: 3 # combat skill multiplier in this terrain
+             
+- # desert raiders - mounted and well suited to desert combat
+    name: desert raiders    
+    requires: 
+        scout: 3
+        gold: 10    
+        desert: 3 # must be adjacent to 3 of this terrain to amalgamate
+    stats: # same as riders but different bonus
+        speed: 3 
+        vision: 3 
+        combat: 15
+        ferocity: 5
+        morale: 20
+        bonus: 
+            desert: 3
+            plains: 1.1   
+            forest: 0.4
+            mountains: 0.4
+
+- # orc horde, fast abd rivals army in power but is an expensive mercenary unit
+    name: orc horde     
+    requires: 
+        mountain: 3
+        gold: 100
+    stats: 
+        speed: 2
+        vision: 1
+        combat: 400
+        ferocity: 300 
+        morale: 200
+        bonus: 
+            mountain: 1.2
+            forest: 0.6     
+            
+    

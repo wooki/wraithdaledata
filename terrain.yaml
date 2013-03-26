@@ -10,12 +10,13 @@
     
 - # village can be created from farm for 10 gold if you have 3+ farms
     name: village # name of terrain to upgrade to
+    orderable: true # can the player build/upgrade from this area
     from: farms # name of terrain to upgrade from
     gold: 10 # cost in gold (ommit if no cost)
     requires: 
-        - village: 3 # required surrounding terrain (ommit if not required)
+        village: 3 # required surrounding terrain (ommit if not required)
     produces: 
-        - gold: 1 # production should be limited to gold from urban terrain types
+        - gold: 2 # production should be limited to gold from urban terrain types
 
 - # plains can be created from forest for 1 gold
     name: plains
@@ -26,9 +27,12 @@
     name: mine
     from: mountain
     gold: 5
+    produces: 
+        - gold: 1
 
 - # keep can be built for 10 gold if you have 2 villages
     name: "keep"
+    orderable: true # can the player build/upgrade from this area
     from:
         - plains
         - forest
@@ -36,4 +40,38 @@
         - village
     gold: 10
     requires: 
-        - village: 3
+        village: 3
+        
+- # church can be built once yo have substantial urban area
+    name: "church"
+    orderable: false
+    from:
+        - village # so you lose an orderable area (but opens up more units)
+    gold: 10
+    requires: 
+        village: 3            
+    produces: 
+        - gold: 1 # replace with better bonus later
+        
+- # foundry allows armour for knights
+    name: "foundry"
+    orderable: false
+    from:
+        - village
+        - mine
+        - farm
+    gold: 10
+    requires: 
+        mine: 1 
+    produces: 
+        - gold: 1
+        
+- # glade allows elves to be recruited and replaces a village
+    name: "glade"
+    orderable: true
+    from:
+        - village
+    gold: 2 # cheap as it replaces an existing village
+    requires: 
+        forest: 5 # initial villages can never have this many!
+        
